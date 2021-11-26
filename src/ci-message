@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+set -e
+
+message_type="${1}"
+message="${@:2}"
+
+case "${message_type}" in
+    info) echo "INFO: ${message}" ;;
+    warning) echo "WARNING: ${message}" ;;
+    error) echo "ERROR: ${message}" ;;
+    *) echo "ERROR: Invalid message type '${message_type}'."; exit 1 ;;
+esac
