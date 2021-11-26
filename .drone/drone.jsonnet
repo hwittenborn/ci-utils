@@ -9,6 +9,8 @@ local buildPackage() = {
             "github_api_key": {from_secret: "github_api_key"}
         },
         commands: [
+            "apt-get update",
+            "apt-get install git -y",
             "PACMAN=true makedeb -s --no-confirm",
             "PACMAN=true makedeb --print-srcinfo > .SRCINFO"
         ]
