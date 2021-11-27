@@ -50,7 +50,7 @@ except BadCredentialsException:
 tag = f"v{pkgver}-{pkgrel}"
 name = tag
 message = f"Released {tag}."
-filename = "./ci-utils_{pkgver}-{pkgrel}_all.deb"
+filename = f"./ci-utils_{pkgver}-{pkgrel}_all.deb"
 
 repo = client.get_repo(drone_repo)
 release = Repository.create_git_release(repo, tag, name, message)
