@@ -1,42 +1,37 @@
-local buildPackage() = {
-    name: "build-package",
+local buildAndPublish() = {
+    name: "build-and-publish",
     kind: "pipeline",
     type: "docker",
-    steps: [{
-        name: "build-package",
-        image: "proget.hunterwittenborn.com/docker/makedeb/makedeb-alpha:ubuntu-focal",
-        environment: {
-            "github_api_key": {from_secret: "github_api_key"}
+    steps: [
+        {
+            name: "build-package",
+            image: "proget.hunterwittenborn.com/docker/makedeb/makedeb-alpha:ubuntu-focal",
+            environment: {
+                "github_api_key": {from_secret: "github_api_key"}
+            },
+            commands: [
+                "sudo chown makedeb:makedeb ./ -R",
+                "sudo apt-get update",
+                "sudo apt-get install git -y",
+                "PACMAN=true makedeb -s --no-confirm",
+                "PACMAN=true makedeb --print-srcinfo > .SRCINFO"
+            ]
         },
-        commands: [
-            "sudo chown makedeb:makedeb ./ -R",
-            "sudo apt-get update",
-            "sudo apt-get install git -y",
-            "PACMAN=true makedeb -s --no-confirm",
-            "PACMAN=true makedeb --print-srcinfo > .SRCINFO"
-        ]
-    }]
-};
 
-local publishPackage() = {
-    name: "publish-package",
-    kind: "pipeline",
-    type: "docker",
-    depends_on: ["build-package"],
-    steps: [{
-        name: "publish-package",
-        image: "python",
-        environment: {
-            github_api_key: {from_secret: "github_api_key"}
-        },
-        commands: [
-            "pip install -r ./requirements.txt",
-            "./publish.py"
-        ]
-    }]
+        {
+            name: "publish-package",
+            image: "python",
+            environment: {
+                github_api_key: {from_secret: "github_api_key"}
+            },
+            commands: [
+                "pip install -r ./requirements.txt",
+                "./publish.py"
+            ]
+        }
+    ]
 };
 
 [
-    buildPackage(),
-    publishPackage()
+    buildAndPublish(),
 ]
