@@ -2,8 +2,7 @@ pkgname=ci-utils
 pkgver=1.0.0
 pkgrel=1
 arch=('any')
-depends=('bash')
-makedepends=('git')
+depends=('bash' 'openssh-client' 'findutils' 'gawk' 'grep')
 license=('GPL3')
 url='https://github.com/hwittenborn/ci-utils'
 
