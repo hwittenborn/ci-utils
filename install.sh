@@ -30,4 +30,4 @@ echo "INFO: Downloading latest release..."
 run_command curl -L 'https://github.com/hwittenborn/ci-utils/releases/latest/download/ci-utils.deb' -o "${temp_file}"
 
 echo "INFO: Installing package..."
-run_command apt-get install "${temp_file}" -y --dry-run
+run_command apt-get install "${temp_file}" -y
