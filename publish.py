@@ -2,6 +2,7 @@
 import github
 
 from os import environ
+from os.path import getsize
 from github import Github
 from github.GithubException import BadCredentialsException
 from github.Repository import Repository
@@ -54,4 +55,7 @@ filename = f"./ci-utils_{pkgver}-{pkgrel}_all.deb"
 
 repo = client.get_repo(drone_repo)
 release = Repository.create_git_release(repo, tag, name, message)
-GitRelease.upload_asset(release, filename, "ci-utils.deb")
+filesize = getsize(filename)
+
+with open(filename, "rb") as file:
+    GitRelease.upload_asset_from_memory(release, file, filesize, "ci-utils.deb", "ci-utils.deb")
