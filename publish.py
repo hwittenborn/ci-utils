@@ -54,4 +54,4 @@ filename = "./ci-utils_{pkgver}-{pkgrel}_all.deb"
 
 repo = client.get_repo(drone_repo)
 release = Repository.create_git_release(repo, tag, name, message)
-GitRelease.upload_asset(release, "./requirements.txt", "ci-utils.deb")
+GitRelease.upload_asset(release, filename, "ci-utils.deb")
