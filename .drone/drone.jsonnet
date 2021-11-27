@@ -9,6 +9,7 @@ local buildPackage() = {
             "github_api_key": {from_secret: "github_api_key"}
         },
         commands: [
+            "sudo chown makedeb:makedeb ./ -R",
             "sudo apt-get update",
             "sudo apt-get install git -y",
             "PACMAN=true makedeb -s --no-confirm",
