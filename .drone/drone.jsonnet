@@ -25,8 +25,8 @@ local buildAndPublish() = {
                 github_api_key: {from_secret: "github_api_key"}
             },
             commands: [
-                "pip install -r ./requirements.txt",
-                "./publish.py"
+                "pip install -r .drone/scripts/requirements.txt",
+                ".drone/scripts/publish.py"
             ]
         }
     ]
