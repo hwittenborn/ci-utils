@@ -1,6 +1,8 @@
+# Maintainer: Hunter Wittenborn <hunter@hunterwittenborn.com>
 pkgname=ci-utils
-pkgver=1.0.3
+pkgver=1.0.4
 pkgrel=1
+pkgdesc="Various utilities for use in CI systems"
 arch=('any')
 depends=('bash' 'openssh-client' 'findutils' 'gawk' 'grep')
 license=('GPL3')
