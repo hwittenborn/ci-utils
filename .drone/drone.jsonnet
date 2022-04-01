@@ -2,6 +2,7 @@ local buildAndPublish() = {
     name: "build-and-publish",
     kind: "pipeline",
     type: "docker",
+    trigger: {branch: ["main"]},
     steps: [
         {
             name: "build-package",
